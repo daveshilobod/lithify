@@ -1,0 +1,97 @@
+# Product catalog schema
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://example.com/schemas/product.schema.json"
+title: Product
+type: object
+required:
+  - sku
+  - name
+  - price
+  - currency
+  - in_stock
+properties:
+  sku:
+    type: string
+    pattern: "^[A-Z0-9]{8,12}$"
+    description: Stock keeping unit
+  name:
+    type: string
+    minLength: 1
+    maxLength: 200
+    description: Product name
+  description:
+    type: string
+    maxLength: 2000
+    description: Product description
+  price:
+    type: number
+    minimum: 0
+    exclusiveMaximum: 1000000
+    multipleOf: 0.01
+    description: Product price
+  currency:
+    type: string
+    enum: ["USD", "EUR", "GBP", "JPY", "CAD"]
+    default: "USD"
+    description: Price currency code
+  in_stock:
+    type: boolean
+    description: Whether item is in stock
+  stock_count:
+    type: integer
+    minimum: 0
+    maximum: 99999
+    description: Number of items in inventory
+  category:
+    type: string
+    enum:
+      - electronics
+      - clothing
+      - home
+      - books
+      - toys
+      - sports
+      - food
+    description: Product category
+  tags:
+    type: array
+    items:
+      type: string
+      pattern: "^[a-z0-9-]+$"
+      minLength: 2
+      maxLength: 30
+    maxItems: 10
+    description: Product tags for search
+  dimensions:
+    type: object
+    properties:
+      weight_kg:
+        type: number
+        minimum: 0
+        maximum: 1000
+        description: Weight in kilograms
+      length_cm:
+        type: number
+        minimum: 0
+        maximum: 500
+        description: Length in centimeters
+      width_cm:
+        type: number
+        minimum: 0
+        maximum: 500
+        description: Width in centimeters
+      height_cm:
+        type: number
+        minimum: 0
+        maximum: 500
+        description: Height in centimeters
+    additionalProperties: false
+    description: Physical dimensions
+  manufacturer:
+    type: string
+    maxLength: 100
+    description: Manufacturer name
+  updated_at:
+    type: string
+    format: date-time
+    description: Last update timestamp

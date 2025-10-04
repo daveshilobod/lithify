@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: CC-BY-4.0
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://example.com/schemas/core/v1/event.schema.json"
+title: "Event"
+type: object
+additionalProperties: false
+description: "Event that uses scalar types from common_types."
+required:
+  - event_id
+  - trace_id
+  - timestamp
+properties:
+  event_id:
+    $ref: "./common_types.schema.json#/$defs/UuidLower"
+    description: "Unique event identifier"
+  trace_id:
+    $ref: "./common_types.schema.json#/$defs/IdHex16Or32"
+    description: "Trace identifier (16 or 32 hex chars)"
+  span_id:
+    $ref: "./common_types.schema.json#/$defs/IdHex16"
+    description: "Span identifier (16 hex chars)"
+  timestamp:
+    $ref: "./common_types.schema.json#/$defs/Rfc3339Timestamp"
+    description: "Event timestamp"
+  version:
+    $ref: "./common_types.schema.json#/$defs/VersionString"
+    description: "Schema version"
+  tags:
+    type: array
+    items:
+      $ref: "./common_types.schema.json#/$defs/NonEmptyString"
+    description: "Event tags"
+  metadata:
+    type: object
+    additionalProperties:
+      $ref: "./common_types.schema.json#/$defs/NonEmptyString"
+    description: "Event metadata"
+  country:
+    $ref: "./common_types.schema.json#/$defs/CountryCode"
+    description: "Country code"
+  hash:
+    $ref: "./common_types.schema.json#/$defs/Sha256Hex"
+    description: "SHA-256 hash"
+  special_key:
+    $ref: "./common_types.schema.json#/$defs/Key~With~Tilde"
+    description: "Field with tilde in def name"
+  special_path:
+    $ref: "./common_types.schema.json#/$defs/Path~1With~1Slash"
+    description: "Field with slash in def name"
