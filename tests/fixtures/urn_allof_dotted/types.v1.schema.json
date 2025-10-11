@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:test:types:v1",
+  "title": "Types",
+  "description": "Common type definitions",
+  "type": "object",
+  "$defs": {
+    "ID": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+$",
+      "description": "Alphanumeric identifier"
+    },
+    "Timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]+$",
+      "description": "Unix timestamp as string"
+    }
+  }
+}

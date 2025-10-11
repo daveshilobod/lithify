@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:example:record:v1",
+  "title": "SystemRecordV1",
+  "x-python-class-name": "SystemRecord",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "$ref": "urn:example:common:v1#/$defs/Identifier"
+    },
+    "data_checksum": {
+      "$ref": "urn:example:common:v1#/$defs/Checksum"
+    }
+  },
+  "required": ["record_id", "data_checksum"]
+}

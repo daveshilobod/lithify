@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:test:entity:v1",
+  "title": "Entity",
+  "description": "A document entity",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Entity identifier with length constraint",
+      "allOf": [
+        {
+          "$ref": "urn:test:types:v1#/$defs/ID"
+        },
+        {
+          "minLength": 8
+        }
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "created_at": {
+      "description": "Creation timestamp",
+      "allOf": [
+        {
+          "$ref": "urn:test:types:v1#/$defs/Timestamp"
+        },
+        {
+          "pattern": "^[1-9][0-9]{9,}$"
+        }
+      ]
+    }
+  },
+  "required": ["id", "name", "created_at"]
+}

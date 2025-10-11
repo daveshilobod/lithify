@@ -1,0 +1,26 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://example.com/schemas/document_conflict.v1.json"
+title: DocumentConflictV1
+x-python-class-name: DocumentConflict
+description: "Test case: UUID base allows [1-5], refinement requires 7 (impossible)"
+
+type: object
+additionalProperties: false
+properties:
+  document_id:
+    description: "Should fail: requires UUID v7 but base only allows v1-5"
+    allOf:
+      - $ref: "common_types.v1.yaml#/$defs/UUID"
+      - type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+
+  title:
+    $ref: "common_types.v1.yaml#/$defs/NonEmptyString"
+
+  checksum:
+    $ref: "common_types.v1.yaml#/$defs/Sha256Hex"
+
+required:
+  - document_id
+  - title
+  - checksum

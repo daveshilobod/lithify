@@ -1,0 +1,26 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://example.com/schemas/record_valid.v1.json"
+title: RecordValidV1
+x-python-class-name: RecordValid
+description: "Test case: UUID base allows [1-5], refinement requires 5 (valid subset)"
+
+type: object
+additionalProperties: false
+properties:
+  record_id:
+    description: "Should succeed: requires UUID v5 which is within base [1-5]"
+    allOf:
+      - $ref: "common_types.v1.yaml#/$defs/UUID"
+      - type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+
+  name:
+    $ref: "common_types.v1.yaml#/$defs/NonEmptyString"
+
+  hash:
+    $ref: "common_types.v1.yaml#/$defs/Sha256Hex"
+
+required:
+  - record_id
+  - name
+  - hash

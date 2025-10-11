@@ -1,0 +1,30 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: UserProfileV1
+x-python-class-name: UserProfile
+type: object
+required:
+  - user_id
+  - username
+properties:
+  user_id:
+    type: string
+    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+  username:
+    type: string
+    minLength: 3
+    maxLength: 50
+  preferences:
+    $ref: "#/$defs/Preferences"
+
+$defs:
+  Preferences:
+    title: PreferencesV1
+    x-python-class-name: Preferences
+    type: object
+    properties:
+      theme:
+        type: string
+        enum: ["light", "dark"]
+      language:
+        type: string
+        default: "en"

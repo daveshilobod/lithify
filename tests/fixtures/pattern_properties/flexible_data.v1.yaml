@@ -1,0 +1,39 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://example.com/schemas/flexible_data.v1.json"
+title: FlexibleDataV1
+x-python-class-name: FlexibleData
+description: "Test case: patternProperties with oneOf type unions"
+
+type: object
+additionalProperties: false
+properties:
+  id:
+    type: string
+
+  timestamp:
+    type: string
+    pattern: "^[0-9]+$"
+
+  payload:
+    type: object
+
+patternProperties:
+  "^meta_[a-z0-9_]+$":
+    description: "Metadata fields with primitive types (corrected: uses 'number' not both 'integer' and 'number')"
+    oneOf:
+      - type: string
+      - type: number
+      - type: boolean
+      - type: "null"
+      - type: array
+        items:
+          oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+        minItems: 1
+
+required:
+  - id
+  - timestamp
+  - payload

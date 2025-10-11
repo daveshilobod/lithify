@@ -1,0 +1,17 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://example.com/schemas/common_types.v1.json"
+title: CommonTypesV1
+
+$defs:
+  UUID:
+    type: string
+    description: "UUID versions 1-5 only"
+    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+
+  NonEmptyString:
+    type: string
+    minLength: 1
+
+  Sha256Hex:
+    type: string
+    pattern: "^[0-9a-f]{64}$"

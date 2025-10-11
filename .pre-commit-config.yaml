@@ -1,0 +1,44 @@
+# Pre-commit hooks for lithify
+# Run: pre-commit install
+# Update: pre-commit autoupdate
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: mixed-line-ending
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  # TODO: Enable after fixing type errors
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.11.2
+  #   hooks:
+  #     - id: mypy
+  #       additional_dependencies:
+  #         - pydantic>=2.5
+  #         - types-PyYAML
+  #       args: [--python-version=3.11]
+
+  - repo: local
+    hooks:
+      - id: install-lithify
+        name: Install lithify in editable mode
+        entry: pip install -e .
+        language: system
+        types: [python]
+        pass_filenames: false
+        always_run: true

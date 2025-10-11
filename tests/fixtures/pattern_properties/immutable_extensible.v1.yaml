@@ -1,0 +1,31 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://example.com/schemas/immutable_extensible.v1.json"
+title: ImmutableExtensibleV1
+x-python-class-name: ImmutableExtensible
+description: "Test case: pattern properties with deep-frozen mode (tests immutability of extra fields)"
+
+type: object
+additionalProperties: false
+properties:
+  record_id:
+    type: string
+    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+
+  created_at:
+    type: string
+    pattern: "^[0-9]+$"
+
+patternProperties:
+  "^ext_[a-z0-9_]+$":
+    description: "Extension fields (must remain immutable in deep-frozen mode)"
+    oneOf:
+      - type: string
+      - type: number
+      - type: array
+        items:
+          type: string
+        minItems: 1
+
+required:
+  - record_id
+  - created_at
